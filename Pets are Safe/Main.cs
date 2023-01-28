@@ -46,10 +46,9 @@ namespace Pets_are_Safe
 
     public class PetsAreSafeSettings : ModSettings
     {
-        public static bool petsPoof; // pets that are attacked disappear and then reappear when it's safe
-        public static bool animalsPoof; // all animals poof, as above
-        public static bool petsDown; // pets can be injured, but vital body parts are never destroyed and they don't bleed out
-        public static bool animalsDown; // all animals are immortal, as above
+        public static bool petsPoof = true; // pets that are attacked disappear and then reappear when it's safe
+        public static bool petsDown = false; // pets can be injured, but vital body parts are never destroyed and they don't bleed out
+        public static bool wildSafe; // apply the above option to all animals, if either is active
         public static bool animalsHeal; // if a hediff would kill an animal, it instead is removed
         public static bool animalsBridge; // if a hediff would kill an animal, it instead crosses the rainbow bridge
         public static bool noRaiders; // raiders will not spawn with animals
@@ -58,9 +57,8 @@ namespace Pets_are_Safe
         public override void ExposeData()
         {
             Scribe_Values.Look(ref petsPoof, "petsPoof");
-            Scribe_Values.Look(ref animalsPoof, "animalsPoof");
             Scribe_Values.Look(ref petsDown, "petsDown");
-            Scribe_Values.Look(ref animalsDown, "animalsDown");
+            Scribe_Values.Look(ref wildSafe, "wildSafe");
             Scribe_Values.Look(ref animalsHeal, "animalsHeal");
             Scribe_Values.Look(ref animalsBridge, "animalsBridge");
             Scribe_Values.Look(ref noRaiders, "noRaiders");
