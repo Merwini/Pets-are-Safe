@@ -8,10 +8,10 @@ using Verse;
 using UnityEngine;
 using HarmonyLib;
 
-namespace Pets_are_Safe
+namespace PetsAreSafe
 {
     [StaticConstructorOnStartup]
-    public partial class PetsAreSafe : Mod
+    public class PetsAreSafe : Mod
     {
         /*
          * TODO FEATURE LIST
@@ -67,6 +67,7 @@ namespace Pets_are_Safe
         }
     }
 
+    /*
     [StaticConstructorOnStartup]
     public static class HarmonyPatches
     {
@@ -74,14 +75,13 @@ namespace Pets_are_Safe
         static HarmonyPatches()
         {
             Harmony harmony = new Harmony(id: "rimWorld.nuff.petsaresafe");
-            // TODO patches go here
-            // here's an example from the other mod
-            // harmony.Patch(AccessTools.Method(typeof(WorldInterface), nameof(WorldInterface.WorldInterfaceUpdate)), prefix: new HarmonyMethod(patchType, nameof(WorldInterfaceUpdatePrefix)));
+            harmony.Patch(AccessTools.Method(typeof(Verse.Thing), nameof(Verse.Thing.TakeDamage)), prefix: new HarmonyMethod(patchType, nameof(TakeDamagePrefix)));
         }
 
-        public static void ExamplePrefix()
+        public static void TakeDamagePrefix(Thing __instance, DamageInfo dinfo)
         {
-
+              if (__instance.def.) 
         }
     }
+    */
 }
