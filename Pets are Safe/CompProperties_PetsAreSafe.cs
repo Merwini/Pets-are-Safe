@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using Verse;
 
-namespace PetsAreSafe
+namespace Nuff.PetsAreSafe
 {
     public class CompProperties_PetsAreSafe : CompProperties
     {
