@@ -8,4 +8,17 @@ namespace Nuff.PetsAreSafe
     {
         public static HediffDef PASPlayDead;
     }
+
+    [DefOf]
+    class PAS_MentalBreakDefOf
+    {
+        public static MentalBreakDef Slaughterer;
+    }
+
+    [DefOf]
+    class PAS_IncidentDefOf
+    {
+        public static IncidentDef AnimalInsanitySingle;
+    }
+
 }

@@ -29,15 +29,13 @@ namespace Nuff.PetsAreSafe
         public WildOrFact wildOrFact = WildOrFact.Just_Your_Animals;
         public PoofOrPlay poofOrPlay = PoofOrPlay.Play_Dead;
 
-        //public static bool petsPoof = true; // pets that are attacked disappear and then reappear when it's safe
-        //public static bool petsPlayDead = false; // pets can be injured, but vital body parts are never destroyed and they don't bleed out
-        //public static bool factSafe = true;
-        //public static bool wildSafe = false; // apply the above option to all animals, if either is active
-
         public static bool animalsHeal; // if a hediff would kill an animal, it instead is removed
         public static bool animalsBridge; // if a hediff would kill an animal, it instead crosses the rainbow bridge
         public static bool noRaiders; // raiders will not spawn with animals
         public static bool noPredators; // predatory animals will not spawn
+        public static bool noSlaughterer;
+        public static bool noInsanity;
+        public static bool noManhunterPack;
 
         public override void ExposeData()
         {
@@ -51,6 +49,10 @@ namespace Nuff.PetsAreSafe
             Scribe_Values.Look(ref animalsBridge, "animalsBridge");
             Scribe_Values.Look(ref noRaiders, "noRaiders");
             Scribe_Values.Look(ref noPredators, "noPredators");
+            Scribe_Values.Look(ref noSlaughterer, "noSlaughterer");
+            Scribe_Values.Look(ref noInsanity, "noInsanity");
+            Scribe_Values.Look(ref noManhunterPack, "noManhunterPack");
+
 
             base.ExposeData();
         }
@@ -68,6 +70,15 @@ namespace Nuff.PetsAreSafe
 
             listingStandard.Label("How should animals be protected?");
             listingStandard.EnumSelector(ref poofOrPlay, "", "", "");
+            listingStandard.Gap();
+
+            listingStandard.CheckboxLabeled("Disable Slaughterer mental break? (requires restart)", ref noSlaughterer);
+            listingStandard.Gap();
+
+            listingStandard.CheckboxLabeled("Disable single animal insanity event? (requires restart)", ref noInsanity);
+            listingStandard.Gap();
+
+            listingStandard.CheckboxLabeled("Disable manhunter pack event? (requires restart)", ref noManhunterPack);
             listingStandard.Gap();
 
             listingStandard.End();
