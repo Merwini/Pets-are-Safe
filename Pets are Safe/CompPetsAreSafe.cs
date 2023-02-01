@@ -62,17 +62,13 @@ namespace Nuff.PetsAreSafe
         public bool DoAPoof(Pawn animal)
         {
             Map map = animal.MapHeld;
-            Log.Message("Map size is " + map.Size.x + ", " + map.Size.z);
-            Log.Message("Map center is " + map.Center.x + ", " + map.Center.z);
             bool success = false;
             Random rnd = new Random();
             IntVec3 currentPosition = animal.Position;
             int randX = rnd.Next(-10, 10);
             int randZ = rnd.Next(-10, 10);
             int newX = currentPosition.x + randX;
-            Log.Message("new x value is " + newX);
             int newZ = currentPosition.z + randZ;
-            Log.Message("new z value is " + newZ);
             if (newX < 0 || newX >= map.Size.x)
             {
                 if (newX < map.Center.x)
@@ -96,11 +92,14 @@ namespace Nuff.PetsAreSafe
                 }
             }
 
-            IntVec3 newPosition = new IntVec3(newX, 0, newZ);
-            
+            IntVec3 targetVec = new IntVec3(newX, 0, newZ);
+            LocalTargetInfo target = new LocalTargetInfo(targetVec);
+            animal.pather.StartPath(target, Verse.AI.PathEndMode.OnCell);
+            animal.pather.PatherTick();
+
             try
             {
-                animal.SetPositionDirect(newPosition);
+                animal.SetPositionDirect(animal.pather.Destination.Cell);
                 animal.ClearMind();
                 success = true;
             }
