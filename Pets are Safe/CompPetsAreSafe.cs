@@ -41,36 +41,81 @@ namespace Nuff.PetsAreSafe
             return; 
         }
 
-        public bool DoAnEscape(ThingWithComps thing)
+        public bool DoAnEscape(ThingWithComps thingWithComps)
         {
             bool success = false;
+            Pawn animal = thingWithComps as Pawn;
 
             if (settings.poofOrPlay == PetsAreSafeSettings.PoofOrPlay.Play_Dead)
             {
-                success = TakeANap(thing);
+                success = TakeANap(animal);
             }
             else if (settings.poofOrPlay == PetsAreSafeSettings.PoofOrPlay.Poof_To_Safety)
             {
-                success = DoAPoof(thing);
+                success = DoAPoof(animal);
             }
             else
                 success = true;
             return success;
         }
 
-        public bool DoAPoof(ThingWithComps thing)
+        public bool DoAPoof(Pawn animal)
         {
+            Map map = animal.MapHeld;
+            Log.Message("Map size is " + map.Size.x + ", " + map.Size.z);
+            Log.Message("Map center is " + map.Center.x + ", " + map.Center.z);
             bool success = false;
+            Random rnd = new Random();
+            IntVec3 currentPosition = animal.Position;
+            int randX = rnd.Next(-10, 10);
+            int randZ = rnd.Next(-10, 10);
+            int newX = currentPosition.x + randX;
+            Log.Message("new x value is " + newX);
+            int newZ = currentPosition.z + randZ;
+            Log.Message("new z value is " + newZ);
+            if (newX < 0 || newX >= map.Size.x)
+            {
+                if (newX < map.Center.x)
+                {
+                    newX = currentPosition.x + 10;
+                }
+                else
+                {
+                    newX = currentPosition.x - 10;
+                }    
+            }
+            if (newZ < 0 || newZ >= map.Size.z)
+            {
+                if (newZ < map.Center.z)
+                {
+                    newZ = currentPosition.z + 10;
+                }
+                else
+                {
+                    newZ = currentPosition.z - 10;
+                }
+            }
+
+            IntVec3 newPosition = new IntVec3(newX, 0, newZ);
+            
+            try
+            {
+                animal.SetPositionDirect(newPosition);
+                animal.ClearMind();
+                success = true;
+            }
+            catch(Exception ex)
+            {
+                ;
+            }
 
             return success;
         }
 
-        public bool TakeANap(ThingWithComps thingWithComps)
+        public bool TakeANap(Pawn animal)
         {
             bool success = false;
-            Pawn pawn = thingWithComps as Pawn;
-            //pawn.health.AddHediff(HediffDefOf.Anesthetic);
-            pawn.health.AddHediff(PAS_HediffDefOf.PASPlayDead);
+            animal.health.AddHediff(PAS_HediffDefOf.PASPlayDead);
             success = true;
 
             return success;

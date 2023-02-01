@@ -8,6 +8,11 @@ using Verse;
 
 namespace PeteTimesSix.CompactHediffs.Rimworld.UI
 {
+	/*
+	 * Used with permission from PeteTimesSix
+	 * Thank you so much
+	 */
+
 	public static class Listing_StandardExtensions
 	{
 		public static float ButtonTextPadding = 5f;

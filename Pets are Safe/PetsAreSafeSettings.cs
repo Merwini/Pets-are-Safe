@@ -45,10 +45,13 @@ namespace Nuff.PetsAreSafe
             //Scribe_Values.Look(ref petsPlayDead, "petsPlayDead");
             //Scribe_Values.Look(ref wildSafe, "factSafe");
             //Scribe_Values.Look(ref wildSafe, "wildSafe");
+            Scribe_Values.Look<WildOrFact>(ref wildOrFact, "wildOrFact", WildOrFact.Just_Your_Animals, true);
+            Scribe_Values.Look<PoofOrPlay>(ref poofOrPlay, "poofOrPlay", PoofOrPlay.Play_Dead, true);
             Scribe_Values.Look(ref animalsHeal, "animalsHeal");
             Scribe_Values.Look(ref animalsBridge, "animalsBridge");
             Scribe_Values.Look(ref noRaiders, "noRaiders");
             Scribe_Values.Look(ref noPredators, "noPredators");
+
             base.ExposeData();
         }
 
