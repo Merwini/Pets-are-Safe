@@ -11,33 +11,36 @@ namespace Nuff.PetsAreSafe
 {
     public class CompPetsAreSafe : ThingComp
     {
-
-        PetsAreSafeSettings settings = PetsAreSafe.pasSettings;
-
+        public CompProperties_PetsAreSafe Props
+        {
+            get
+            {
+                return (CompProperties_PetsAreSafe)props;
+            }
+        }
         public override void PostPreApplyDamage(DamageInfo dinfo, out bool absorbed)
         {
             absorbed = false;
             bool flag;
 
-            if (dinfo.Instigator != null)
-            {
-                Pawn pawn = dinfo.Instigator as Pawn;
-                if (pawn != null)
-                {
-                    if (settings.wildOrFact == PetsAreSafeSettings.WildOrFact.All_Animals)
-                    {
-                        flag = DoAnEscape(parent);
-                        absorbed = true;
-                    }
-                    else if (settings.wildOrFact == PetsAreSafeSettings.WildOrFact.Just_Your_Animals
-                                                 && parent.Faction != null
-                                                 && parent.Faction.IsPlayer)
-                    {
-                        flag = DoAnEscape(parent);
-                        absorbed = true;
-                    }
-                }
+            //early returns
+            if (dinfo.Instigator == null)
+                return;
+            if (PetsAreSafeSettings.excludedAnimalsHash.Contains(parent.def))
+                return;
+            if (PetsAreSafeSettings.wildOrFact == PetsAreSafeSettings.WildOrFact.Just_Your_Animals
+                && (parent.Faction == null || (parent.Faction != null && !parent.Faction.IsPlayer)))
+                return;
+            if (parent is Pawn parentPawn
+                && parentPawn.ShouldBeSlaughtered())
+                return;
+            
+            if (dinfo.Instigator is Pawn pawn)
+            {   
+                flag = DoAnEscape(parent);
+                absorbed = true;
             }
+
             return; 
         }
 
@@ -46,11 +49,11 @@ namespace Nuff.PetsAreSafe
             bool success = false;
             Pawn animal = thingWithComps as Pawn;
 
-            if (settings.poofOrPlay == PetsAreSafeSettings.PoofOrPlay.Play_Dead)
+            if (PetsAreSafeSettings.poofOrPlay == PetsAreSafeSettings.PoofOrPlay.Play_Dead)
             {
                 success = TakeANap(animal);
             }
-            else if (settings.poofOrPlay == PetsAreSafeSettings.PoofOrPlay.Poof_To_Safety)
+            else if (PetsAreSafeSettings.poofOrPlay == PetsAreSafeSettings.PoofOrPlay.Poof_To_Safety)
             {
                 success = DoAPoof(animal);
             }

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Verse;
 using UnityEngine;
 using HarmonyLib;
-using PeteTimesSix.CompactHediffs.Rimworld.UI;
 
 namespace Nuff.PetsAreSafe
 {
@@ -41,6 +40,12 @@ namespace Nuff.PetsAreSafe
         {
             pasSettings.DoSettingsWindowContents(inRect);
             base.DoSettingsWindowContents(inRect);
+        }
+
+        public override void WriteSettings()
+        {
+            PASController.UpdateExcludedHash();
+            base.WriteSettings();
         }
     }
 }

@@ -15,9 +15,5 @@ namespace Nuff.PetsAreSafe
         {
             this.compClass = typeof(CompPetsAreSafe);
         }
-        public CompProperties_PetsAreSafe(Type compClass) : base(compClass)
-        {
-            this.compClass = compClass;
-        }
     }
 }

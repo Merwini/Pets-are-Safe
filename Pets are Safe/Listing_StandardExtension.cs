@@ -6,19 +6,47 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 
-namespace PeteTimesSix.CompactHediffs.Rimworld.UI
+namespace Nuff.PetsAreSafe
 {
-	/*
-	 * Used with permission from PeteTimesSix
-	 * Thank you so much
-	 */
-
 	public static class Listing_StandardExtensions
 	{
 		public static float ButtonTextPadding = 5f;
 		public static float AfterLabelMinGap = 10f;
 
 		public static readonly Color SelectedButtonColor = new Color(.65f, 1f, .65f);
+
+		#region EnumLicense
+		/*
+		 * Used with permission from PeteTimesSix
+		 * Thank you so much
+		 * 
+			/*
+				Code used and modified from Compact Hediffs by PeteTimesSix, under MIT License
+
+				MIT License
+
+				Copyright (c) 2020 PeteTimesSix
+
+				Permission is hereby granted, free of charge, to any person obtaining a copy
+				of this software and associated documentation files (the "Software"), to deal
+				in the Software without restriction, including without limitation the rights
+				to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+				copies of the Software, and to permit persons to whom the Software is
+				furnished to do so, subject to the following conditions:
+
+				The above copyright notice and this permission notice shall be included in all
+				copies or substantial portions of the Software.
+
+				THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+				IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+				FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+				AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+				LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+				OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+				SOFTWARE.
+			 */
+
+		#endregion
 
 		public static void EnumSelector<T>(this Listing_Standard listing, ref T value, string label, string valueLabelPrefix, string valueTooltipPostfix = "_tooltip", string tooltip = null) where T : Enum
 		{
@@ -111,5 +139,136 @@ namespace PeteTimesSix.CompactHediffs.Rimworld.UI
 			listing.Gap(listing.verticalSpacing);
 			GUI.color = Color.white;
 		}
+
+		#region ListLicense
+		/*
+		 * Code used and modified from Minify Everything by erdelf, under MIT License
+
+			MIT License
+
+			Copyright (c) 2017 
+
+			Permission is hereby granted, free of charge, to any person obtaining a copy
+			of this software and associated documentation files (the "Software"), to deal
+			in the Software without restriction, including without limitation the rights
+			to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+			copies of the Software, and to permit persons to whom the Software is
+			furnished to do so, subject to the following conditions:
+
+			The above copyright notice and this permission notice shall be included in all
+			copies or substantial portions of the Software.
+
+			THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+			IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+			FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+			AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+			LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+			OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+			SOFTWARE.
+		 */
+		#endregion
+		public static void ListControl(this Listing_Standard listingStandard, Rect inRect, ref List<ThingDef> leftList, ref List<ThingDef> rightList,
+										ref string searchTerm, ref Vector2 leftScrollPosition, ref Vector2 rightScrollPosition, ref ThingDef leftSelectedObject, ref ThingDef rightSelectedObject,
+										string columnLabel, float rectPCT)
+		{
+			string tempString = searchTerm;
+
+			Rect listControlRect = new Rect(0, 0, inRect.width * 0.9f, inRect.height * rectPCT);
+			listingStandard.BeginSection(inRect.height * rectPCT);
+			Rect topRect = listControlRect.TopPart(pct: 0.05f / rectPCT);
+			searchTerm = Widgets.TextField(rect: topRect.RightPart(pct: 0.95f).LeftPart(pct: 0.95f), text: searchTerm);
+			float topPartF = 0.1f / rectPCT;
+			Rect labelRect = listControlRect.TopPart(pct: topPartF).BottomHalf();
+			Rect bottomRect = listControlRect.BottomPart(pct: 1 - topPartF);
+
+			#region leftSide
+
+			Rect leftRect = bottomRect.LeftHalf().RightPart(pct: 0.9f).LeftPart(pct: 0.9f);
+			GUI.BeginGroup(position: leftRect, style: new GUIStyle(other: GUI.skin.box));
+			List<ThingDef> tempList2 = rightList;
+			List<ThingDef> tempList = leftList.Where(predicate: td => td.label.ToLower().Contains(tempString.ToLower())
+																		&& !tempList2.Contains(td)).ToList();
+			tempList = tempList.OrderBy(keySelector: td => td.label).ToList();
+			float num = 3f;
+			Widgets.BeginScrollView(outRect: leftRect.AtZero(), scrollPosition: ref leftScrollPosition,
+									viewRect: new Rect(x: 0f, y: 0f, width: leftRect.width / 10 * 9, height: tempList.Count * 32f));
+			if (!tempList.NullOrEmpty())
+			{
+				foreach (ThingDef td in tempList)
+				{
+					Rect rowRect = new Rect(x: 5, y: num, width: leftRect.width - 6, height: 30);
+					Widgets.DrawHighlightIfMouseover(rect: rowRect);
+					if (td == leftSelectedObject)
+						Widgets.DrawHighlightSelected(rect: rowRect);
+					Widgets.Label(rect: rowRect, label: td.label);
+					if (Widgets.ButtonInvisible(butRect: rowRect))
+						leftSelectedObject = td;
+
+					num += 32f;
+				}
+			}
+			Widgets.EndScrollView();
+			GUI.EndGroup();
+
+			#endregion
+
+
+			#region rightSide
+
+			Widgets.Label(rect: labelRect.RightHalf().RightPart(pct: 0.9f), label: columnLabel);
+			Rect rightRect = bottomRect.RightHalf().RightPart(pct: 0.9f).LeftPart(pct: 0.9f);
+			GUI.BeginGroup(position: rightRect, style: GUI.skin.box);
+			num = 6f;
+			Widgets.BeginScrollView(outRect: rightRect.AtZero(), scrollPosition: ref rightScrollPosition,
+									viewRect: new Rect(x: 0f, y: 0f, width: rightRect.width / 5 * 4, height: rightList.Count * 32f));
+			if (!rightList.NullOrEmpty())
+			{
+				foreach (ThingDef td in rightList.Where(predicate: td => (td.label.Contains(value: tempString))))
+				{
+					Rect rowRect = new Rect(x: 5, y: num, width: leftRect.width - 6, height: 30);
+					Widgets.DrawHighlightIfMouseover(rect: rowRect);
+					if (td == rightSelectedObject)
+						Widgets.DrawHighlightSelected(rect: rowRect);
+					Widgets.Label(rect: rowRect, label: td.label);
+					if (Widgets.ButtonInvisible(butRect: rowRect))
+						rightSelectedObject = td;
+
+					num += 32f;
+				}
+			}
+			Widgets.EndScrollView();
+			GUI.EndGroup();
+
+			#endregion
+
+
+			#region buttons
+
+			if (Widgets.ButtonImage(butRect: bottomRect.BottomPart(pct: 0.6f).TopPart(pct: 0.1f).RightPart(pct: 0.525f).LeftPart(pct: 0.1f), tex: TexUI.ArrowTexRight) &&
+				leftSelectedObject != null)
+			{
+				rightList.Add(item: leftSelectedObject);
+				PetsAreSafeSettings.animalsByDefName.Add(leftSelectedObject.defName);
+
+
+				rightList = rightList.OrderBy(keySelector: td => td.label).ToList();
+				rightSelectedObject = leftSelectedObject;
+				leftSelectedObject = null;
+			}
+
+			if (Widgets.ButtonImage(butRect: bottomRect.BottomPart(pct: 0.4f).TopPart(pct: 0.15f).RightPart(pct: 0.525f).LeftPart(pct: 0.1f), tex: TexUI.ArrowTexLeft) &&
+				rightSelectedObject != null)
+			{
+				rightList.Remove(item: rightSelectedObject);
+				leftSelectedObject = rightSelectedObject;
+				PetsAreSafeSettings.animalsByDefName.Remove(leftSelectedObject.defName);
+				rightSelectedObject = null;
+			}
+
+			#endregion
+			listingStandard.EndSection(listingStandard);
+		}
 	}
+
+
 }

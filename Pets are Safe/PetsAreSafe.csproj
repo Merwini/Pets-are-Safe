@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefChecks.cs" />
+    <Compile Include="PASController.cs" />
     <Compile Include="PAS_HediffDefOf.cs" />
     <Compile Include="Listing_StandardExtension.cs" />
     <Compile Include="PetsAreSafeSettings.cs" />
