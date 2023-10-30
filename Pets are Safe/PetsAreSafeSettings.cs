@@ -74,7 +74,7 @@ namespace Nuff.PetsAreSafe
             Scribe_Values.Look(ref noInsanity, "noInsanity");
             Scribe_Values.Look(ref noManhunterPack, "noManhunterPack");
 
-            if (Scribe.mode == LoadSaveMode.Saving && !excludedAnimalsList.NullOrEmpty())
+            if (Scribe.mode == LoadSaveMode.Saving && excludedAnimalsList != null)
             {
                 animalsByDefName = new List<string>();
                 for (int i = 0; i < excludedAnimalsList.Count; i++)
