@@ -248,7 +248,6 @@ namespace Nuff.PetsAreSafe
 				leftSelectedObject != null)
 			{
 				rightList.Add(item: leftSelectedObject);
-				PetsAreSafeSettings.animalsByDefName.Add(leftSelectedObject.defName);
 
 
 				rightList = rightList.OrderBy(keySelector: td => td.label).ToList();
@@ -261,7 +260,6 @@ namespace Nuff.PetsAreSafe
 			{
 				rightList.Remove(item: rightSelectedObject);
 				leftSelectedObject = rightSelectedObject;
-				PetsAreSafeSettings.animalsByDefName.Remove(leftSelectedObject.defName);
 				rightSelectedObject = null;
 			}
 

@@ -74,7 +74,21 @@ namespace Nuff.PetsAreSafe
             Scribe_Values.Look(ref noInsanity, "noInsanity");
             Scribe_Values.Look(ref noManhunterPack, "noManhunterPack");
 
+            if (Scribe.mode == LoadSaveMode.Saving && !excludedAnimalsList.NullOrEmpty())
+            {
+                animalsByDefName = new List<string>();
+                for (int i = 0; i < excludedAnimalsList.Count; i++)
+                {
+                    animalsByDefName.Add(excludedAnimalsList[i].defName);
+                }
+            }
+
             Scribe_Collections.Look(ref animalsByDefName, "animalsByDefName", LookMode.Value);
+
+            if (Scribe.mode == LoadSaveMode.LoadingVars && animalsByDefName == null)
+            {
+                animalsByDefName = new List<string>();
+            }
 
             base.ExposeData();
         }

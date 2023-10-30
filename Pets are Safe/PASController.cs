@@ -17,6 +17,7 @@ namespace Nuff.PetsAreSafe
 
             //Populate excludedAnimals list by using the animalsByDefName string list to look up the ThingDefs
             PetsAreSafeSettings.excludedAnimalsList = RebuildThingDefList();
+
             UpdateExcludedHash();
         }
 
@@ -24,6 +25,11 @@ namespace Nuff.PetsAreSafe
         {
             Dictionary<string, ThingDef> defDict = new Dictionary<string, ThingDef>();
             List<ThingDef> thingDefs = new List<ThingDef>();
+
+            if (PetsAreSafeSettings.animalsByDefName.NullOrEmpty())
+            {
+                return new List<ThingDef>();
+            }
 
             for (int i = 0; i < PetsAreSafeSettings.allAnimals.Count; i++)
             {
@@ -49,6 +55,13 @@ namespace Nuff.PetsAreSafe
         internal static void UpdateExcludedHash()
         {
             PetsAreSafeSettings.excludedAnimalsHash = new HashSet<ThingDef>();
+
+            if (PetsAreSafeSettings.excludedAnimalsList.NullOrEmpty())
+            {
+                PetsAreSafeSettings.excludedAnimalsList = new List<ThingDef>();
+                return;
+            }
+
             for (int i = 0; i < PetsAreSafeSettings.excludedAnimalsList.Count; i++)
             {
                 PetsAreSafeSettings.excludedAnimalsHash.Add(PetsAreSafeSettings.excludedAnimalsList[i]);
