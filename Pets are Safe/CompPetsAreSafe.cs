@@ -18,7 +18,7 @@ namespace Nuff.PetsAreSafe
                 return (CompProperties_PetsAreSafe)props;
             }
         }
-        public override void PostPreApplyDamage(DamageInfo dinfo, out bool absorbed)
+        public override void PostPreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
         {
             absorbed = false;
             bool flag;
