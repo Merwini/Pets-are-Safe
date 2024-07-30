@@ -24,22 +24,22 @@ namespace Nuff.PetsAreSafe
             bool flag;
 
             //early returns
-            if (dinfo.Instigator == null)
+            if (parent is Pawn parentPawn
+                && parentPawn.ShouldBeSlaughtered())
                 return;
             if (PetsAreSafeSettings.excludedAnimalsHash.Contains(parent.def))
                 return;
             if (PetsAreSafeSettings.wildOrFact == PetsAreSafeSettings.WildOrFact.Just_Your_Animals
                 && (parent.Faction == null || (parent.Faction != null && !parent.Faction.IsPlayer)))
                 return;
-            if (parent is Pawn parentPawn
-                && parentPawn.ShouldBeSlaughtered())
+            if (PetsAreSafeSettings.allDamageOrEnemies == PetsAreSafeSettings.AllDamageOrEnemies.Living_Things
+                && (dinfo.Instigator == null || !(dinfo.Instigator is Pawn pawn)))
+            {
                 return;
-            
-            if (dinfo.Instigator is Pawn pawn)
-            {   
-                flag = DoAnEscape(parent);
-                absorbed = true;
             }
+
+            flag = DoAnEscape(parent);
+            absorbed = true;
 
             return; 
         }

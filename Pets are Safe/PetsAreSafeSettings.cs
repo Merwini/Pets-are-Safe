@@ -24,6 +24,12 @@ namespace Nuff.PetsAreSafe
             All_Animals,
         }
 
+        public enum AllDamageOrEnemies
+        {
+            All_Damage,
+            Living_Things
+        }
+
         public enum PoofOrPlay
         {
             Do_Nothing,
@@ -34,6 +40,7 @@ namespace Nuff.PetsAreSafe
         public static SettingsPage settingsPage = SettingsPage.General_Settings;
         public static WildOrFact wildOrFact = WildOrFact.Just_Your_Animals;
         public static PoofOrPlay poofOrPlay = PoofOrPlay.Play_Dead;
+        public static AllDamageOrEnemies allDamageOrEnemies = AllDamageOrEnemies.All_Damage;
 
         public static bool animalsHeal; // if a hediff would kill an animal, it instead is removed
         public static bool animalsBridge; // if a hediff would kill an animal, it instead crosses the rainbow bridge
@@ -66,6 +73,7 @@ namespace Nuff.PetsAreSafe
             //Scribe_Values.Look(ref wildSafe, "wildSafe");
             Scribe_Values.Look<WildOrFact>(ref wildOrFact, "wildOrFact", WildOrFact.Just_Your_Animals, true);
             Scribe_Values.Look<PoofOrPlay>(ref poofOrPlay, "poofOrPlay", PoofOrPlay.Play_Dead, true);
+            Scribe_Values.Look<AllDamageOrEnemies>(ref allDamageOrEnemies, "allDamageOrEnemies", AllDamageOrEnemies.All_Damage, true);
             Scribe_Values.Look(ref animalsHeal, "animalsHeal");
             Scribe_Values.Look(ref animalsBridge, "animalsBridge");
             Scribe_Values.Look(ref noRaiders, "noRaiders");
@@ -112,6 +120,10 @@ namespace Nuff.PetsAreSafe
                 list.Label("Which animals should be kept safe?");
                 list.EnumSelector(ref wildOrFact, "", "", "");
                 list.Label("Warning: protecting all animals may cause issues with raiders and predators.");
+                list.Gap();
+
+                list.Label("Should animals be kept safe from all damage, or just from living things?");
+                list.EnumSelector(ref allDamageOrEnemies, "", "", "");
                 list.Gap();
 
                 list.Label("How should animals be protected?");
