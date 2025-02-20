@@ -244,7 +244,22 @@ namespace Nuff.PetsAreSafe
 
 			#region buttons
 
-			if (Widgets.ButtonImage(butRect: bottomRect.BottomPart(pct: 0.6f).TopPart(pct: 0.1f).RightPart(pct: 0.525f).LeftPart(pct: 0.1f), tex: TexUI.ArrowTexRight) &&
+			if (Widgets.ButtonImage(butRect: bottomRect.BottomPart(pct: 0.8f).TopPart(pct: 0.1f).RightPart(pct: 0.525f).LeftPart(pct: 0.1f), tex: TexUI.RotRightTex))
+			{
+				foreach (ThingDef td in leftList)
+                {
+					if (!rightList.Contains(td))
+                    {
+						rightList.Add(td);
+                    }
+                }
+
+				rightList = rightList.OrderBy(keySelector: td => td.label).ToList();
+				rightSelectedObject = null;
+				leftSelectedObject = null;
+			}
+
+			if (Widgets.ButtonImage(butRect: bottomRect.BottomPart(pct: 0.6f).TopPart(pct: 0.08f).RightPart(pct: 0.525f).LeftPart(pct: 0.1f), tex: TexUI.ArrowTexRight) &&
 				leftSelectedObject != null)
 			{
 				rightList.Add(item: leftSelectedObject);
@@ -261,6 +276,16 @@ namespace Nuff.PetsAreSafe
 				rightList.Remove(item: rightSelectedObject);
 				leftSelectedObject = rightSelectedObject;
 				rightSelectedObject = null;
+			}
+
+			if (Widgets.ButtonImage(butRect: bottomRect.BottomPart(pct: 0.2f).TopPart(pct: 0.35f).RightPart(pct: 0.525f).LeftPart(pct: 0.1f), tex: TexUI.RotLeftTex))
+			{
+				rightList.Clear();
+
+
+				rightList = rightList.OrderBy(keySelector: td => td.label).ToList();
+				rightSelectedObject = null;
+				leftSelectedObject = null;
 			}
 
 			#endregion
