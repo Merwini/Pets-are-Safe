@@ -6,12 +6,15 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Verse;
+using UnityEngine;
 
 namespace Nuff.PetsAreSafe;
 
 public class CompPetsAreSafe : ThingComp
 {
     public CompProperties_PetsAreSafe Props => (CompProperties_PetsAreSafe)props;
+
+    public static readonly Texture2D Gizmo = ContentFinder<Texture2D>.Get("UI/Commands/MelvinGizmo");
 
     const int escapeRadius = 10;
     const int hostileClearanceSquared = 25;
@@ -152,7 +155,7 @@ public class CompPetsAreSafe : ThingComp
             yield return new Command_Toggle
             {
                 defaultLabel = "PAS_KeepSafe".Translate(),
-                //icon = TODO
+                icon = Gizmo,
                 isActive = () => protect,
                 toggleAction = () => protect = !protect
             };
