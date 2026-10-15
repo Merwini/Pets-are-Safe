@@ -1,0 +1,24 @@
+<ModMetaData>
+	<name>Pets Are Safe</name>
+	<author>Nuff</author>
+  <packageId>nuff.petsaresafe</packageId>
+	<supportedVersions>
+		<li>1.4</li>
+		<li>1.5</li>
+		<li>1.6</li>
+		<li>1.7</li>
+	</supportedVersions>
+	<description>Let no harm come to your wonderful furry (and feathery) friends.</description>
+	<url></url>
+  <modDependencies>
+	<li>
+		<packageId>brrainz.harmony</packageId>
+		<displayName>Harmony</displayName>
+		<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077</steamWorkshopUrl>
+		<downloadUrl>https://github.com/pardeike/HarmonyRimWorld</downloadUrl>
+	</li>
+   </modDependencies>
+  <loadAfter>
+	<li>Ludeon.RimWorld</li>
+  </loadAfter>
+</ModMetaData>

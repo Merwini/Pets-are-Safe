@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+    <PAS_Name>Pets Are Safe</PAS_Name>
+
+    <PAS_Settings1>Which animals should be kept safe?</PAS_Settings1>
+    <PAS_Settings2>Warning: protecting all animals may cause issues with raiders and predators.</PAS_Settings2>
+    <PAS_Settings3>Should animals be kept safe from all damage, or just from enemies?</PAS_Settings3>
+    <PAS_Settings4>How should animals avoid harm?</PAS_Settings4>
+    <PAS_Settings5>Animals to exclude</PAS_Settings5>
+
+    <PAS_DisableSlaughterer>Disable Slaughterer mental break?</PAS_DisableSlaughterer>
+    <PAS_DisableInsanity>Disable animal insanity incident?</PAS_DisableInsanity>
+    <PAS_DisableManhunterIncident>Disable manhunter pack incident?</PAS_DisableManhunterIncident>
+    <PAS_DisableManhunterOnFailedTame>Disable manhunter on failed tame?</PAS_DisableManhunterOnFailedTame>
+
+    <PAS_General>General Settings</PAS_General>
+    <PAS_General_tooltip>General mod settings.</PAS_General_tooltip>
+    <PAS_ExcludeList>Excluded Animals</PAS_ExcludeList>
+    <PAS_ExcludeList_tooltip>Animal types excluded from general settings.</PAS_ExcludeList_tooltip>
+
+    <PAS_YourAnimals>Just your animals</PAS_YourAnimals>
+    <PAS_YourAnimals_tooltip>Only protect your tamed animals</PAS_YourAnimals_tooltip>
+    <PAS_AllAnimals>All animals</PAS_AllAnimals>
+    <PAS_AllAnimals_tooltip>Protect all animals. Don't forget to disable manhunters!</PAS_AllAnimals_tooltip>
+    <PAS_SpecificAnimals>Specific animals</PAS_SpecificAnimals>
+    <PAS_SpecificAnimals_tooltip>A gizmo will appear for each animal, where you can toggle on or off protection</PAS_SpecificAnimals_tooltip>
+    <PAS_KeepSafe>Keep safe</PAS_KeepSafe>
+    
+    <PAS_AllSources>All sources</PAS_AllSources>
+    <PAS_AllSources_tooltip>Prevent damage from all sources, including things like fire and collapsing roofs.</PAS_AllSources_tooltip>
+    <PAS_PawnSources>Living sources (and mechanoids)</PAS_PawnSources>
+    <PAS_PawnSources_tooltip>Only prevent damage from living sources, like humans and other animals. Also mechanoids, undead, etc. Things that move around, I guess.</PAS_PawnSources_tooltip>
+
+    <PAS_Ignore>Do nothing</PAS_Ignore>
+    <PAS_Ignore_tooltip>Do nothing when damaged. Will cause enemies to just keep attacking forever.</PAS_Ignore_tooltip>
+    <PAS_PlayDead>Play dead</PAS_PlayDead>
+    <PAS_PlayDead_tooltip>Play dead when damaged. Last for four in-game hours.</PAS_PlayDead_tooltip>
+    <PAS_PoofToSafety>Poof to safety</PAS_PoofToSafety>
+    <PAS_PoofToSafety_tooltip>Teleport a short distance away.</PAS_PoofToSafety_tooltip>
+
+    
+</LanguageData>
