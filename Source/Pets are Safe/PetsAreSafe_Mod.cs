@@ -66,7 +66,10 @@ public class PetsAreSafe_Mod : Mod
             list.CheckboxLabeled("PAS_DisableSlaughterer".Translate(), ref PetsAreSafe_Settings.disableSlaughtererBreak);
             list.Gap();
 
-            list.CheckboxLabeled("PAS_DisableInsanity".Translate(), ref PetsAreSafe_Settings.disableInsanityIncident);
+            list.CheckboxLabeled("PAS_DisableInsanity".Translate(), ref PetsAreSafe_Settings.disableInsanityIncidents);
+            list.Gap();
+
+            list.CheckboxLabeled("PAS_DisableDiseaseIncidents".Translate(), ref PetsAreSafe_Settings.disableAnimalDiseaseIncidents);
             list.Gap();
 
             list.CheckboxLabeled("PAS_DisableManhunterIncident".Translate(), ref PetsAreSafe_Settings.disableManhunterPackIncident);

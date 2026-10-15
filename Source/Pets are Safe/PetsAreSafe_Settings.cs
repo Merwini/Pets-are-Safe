@@ -48,8 +48,9 @@ public class PetsAreSafe_Settings : ModSettings
     //public static bool noRaiders; // raiders will not spawn with animals
     //public static bool noPredators; // predatory animals will not spawn
     public static bool disableSlaughtererBreak;
-    public static bool disableInsanityIncident;
+    public static bool disableInsanityIncidents;
     public static bool disableManhunterPackIncident;
+    public static bool disableAnimalDiseaseIncidents;
     public static bool disableManhunterOnFailedTame;
 
 
@@ -77,7 +78,8 @@ public class PetsAreSafe_Settings : ModSettings
         //Scribe_Values.Look(ref noRaiders, "noRaiders");
         //Scribe_Values.Look(ref noPredators, "noPredators");
         Scribe_Values.Look(ref disableSlaughtererBreak, "disableSlaughtererBreak");
-        Scribe_Values.Look(ref disableInsanityIncident, "disableInsanityIncident");
+        Scribe_Values.Look(ref disableInsanityIncidents, "disableInsanityIncidents");
+        Scribe_Values.Look(ref disableAnimalDiseaseIncidents, "disableAnimalDiseaseIncidents");
         Scribe_Values.Look(ref disableManhunterPackIncident, "disableManhunterPackIncident");
         Scribe_Values.Look(ref disableManhunterOnFailedTame, "disableManhunterOnFailedTame");
 

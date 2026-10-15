@@ -10,7 +10,8 @@
     <PAS_Settings5>Animals to exclude</PAS_Settings5>
 
     <PAS_DisableSlaughterer>Disable Slaughterer mental break?</PAS_DisableSlaughterer>
-    <PAS_DisableInsanity>Disable animal insanity incident?</PAS_DisableInsanity>
+    <PAS_DisableInsanity>Disable animal insanity incidents?</PAS_DisableInsanity>
+    <PAS_DisableDiseaseIncidents>Disable animal disease incidents?</PAS_DisableDiseaseIncidents>
     <PAS_DisableManhunterIncident>Disable manhunter pack incident?</PAS_DisableManhunterIncident>
     <PAS_DisableManhunterOnFailedTame>Disable manhunter on failed tame?</PAS_DisableManhunterOnFailedTame>
 

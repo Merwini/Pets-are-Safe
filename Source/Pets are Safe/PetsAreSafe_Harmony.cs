@@ -47,7 +47,13 @@ public class PetsAreSafe_Harmony
                 return false;
             }
 
-            if ((__instance is IncidentWorker_AnimalInsanityMass || __instance is IncidentWorker_AnimalInsanitySingle) && PetsAreSafe_Settings.disableInsanityIncident)
+            if ((__instance is IncidentWorker_AnimalInsanityMass || __instance is IncidentWorker_AnimalInsanitySingle) && PetsAreSafe_Settings.disableInsanityIncidents)
+            {
+                __result = false;
+                return false;
+            }
+
+            if (__instance is IncidentWorker_DiseaseAnimal && PetsAreSafe_Settings.disableAnimalDiseaseIncidents)
             {
                 __result = false;
                 return false;

@@ -21,7 +21,6 @@ public class CompPetsAreSafe : ThingComp
     public override void PostPreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
     {
         absorbed = false;
-
         if (ShouldAbsorb(dinfo))
         {
             absorbed = true;
@@ -42,7 +41,7 @@ public class CompPetsAreSafe : ThingComp
         // Damage source shouldn't be blocked
         if (!ShouldAbsorbSource(dinfo))
             return false;
-
+            
         // Currently set to protect specific animals, return based on current toggle
         if (PetsAreSafe_Settings.animalsAffected == PetsAreSafe_Settings.AnimalsAffected.SpecificAnimals)
             return protect;
@@ -55,7 +54,7 @@ public class CompPetsAreSafe : ThingComp
 
         // Currently set to only protect colony animals, and this animal is not one
         if (PetsAreSafe_Settings.animalsAffected == PetsAreSafe_Settings.AnimalsAffected.YourAnimals
-            && parent.Faction?.IsPlayer == true)
+            && parent.Faction?.IsPlayer != true)
         {
             return false;
         }
