@@ -11,6 +11,7 @@
     <SteamAppsPath Condition="'$(SteamAppsPath)' == ''">$(MSBuildProjectDirectory)\..\..\..\..\..\..</SteamAppsPath>
     <HarmonyAssemblyPath Condition="'$(HarmonyAssemblyPath)' == ''">$(SteamAppsPath)\workshop\content\294100\2009463077\1.7\Assemblies\0Harmony.dll</HarmonyAssemblyPath>
     <RimWorldDir Condition="'$(RimWorldDir)' == ''">$(MSBuildProjectDirectory)/../../../..</RimWorldDir>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
