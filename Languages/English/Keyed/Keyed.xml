@@ -39,6 +39,5 @@
     <PAS_PlayDead_tooltip>Play dead when damaged. Last for four in-game hours.</PAS_PlayDead_tooltip>
     <PAS_PoofToSafety>Poof to safety</PAS_PoofToSafety>
     <PAS_PoofToSafety_tooltip>Teleport a short distance away.</PAS_PoofToSafety_tooltip>
-
-    
+ 
 </LanguageData>
